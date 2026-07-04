@@ -1192,12 +1192,14 @@ def _convert_plugins(value: Any, config: dict) -> dict:
 
     # Ensure correct resolution of links when viewing the site from the
     # file system by disabling directory URLs
-    if offline.get("enabled"):
+    if offline.get("enabled", True):
         config["use_directory_urls"] = False
 
         # Append iframe-worker to polyfills/shims
         if not any(
-            "iframe-worker" in url for url in config["extra"]["polyfills"]
+            "iframe-worker"
+            in (url.get("path", "") if isinstance(url, dict) else url)
+            for url in config["extra"]["polyfills"]
         ):
             script = "https://unpkg.com/iframe-worker/shim"
             config["extra"]["polyfills"].append(
