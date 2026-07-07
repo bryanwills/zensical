@@ -458,9 +458,10 @@ def _apply_defaults(config: dict, path: str) -> dict:
         config["edit_uri"] = edit_uri.rstrip("/")
 
     # Set defaults for theme font settings
-    theme = set_default(config, "theme", {}, dict)
-    if isinstance(theme, str):
-        config["theme"] = {"name": theme}
+    if "theme" in config and isinstance(config["theme"], str):
+        config["theme"] = {"name": config["theme"]}
+    elif "theme" not in config:
+        config["theme"] = {}
 
     # Set defaults for custom theme directory
     set_default(config["theme"], "custom_dir", None, str)
