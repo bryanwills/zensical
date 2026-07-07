@@ -877,16 +877,18 @@ def _shim_glightbox(config: dict[str, Any]) -> None:
     # Map glightbox plugin configuration to the extension configuration
     if "glightbox" in config["plugins"]:
         plugin = config["plugins"]["glightbox"]["config"]
-        config["markdown_extensions"].append(GlightboxExtension.name)
-        config["mdx_configs"][GlightboxExtension.name] = plugin
+        if plugin.get("enabled", True):
+            config["markdown_extensions"].append(GlightboxExtension.name)
+            config["mdx_configs"][GlightboxExtension.name] = plugin
 
 
 def _shim_macros(config: dict[str, Any]) -> None:
     # Map macros plugin configuration to the extension configuration
     if "macros" in config["plugins"]:
         plugin = config["plugins"]["macros"]["config"]
-        config["markdown_extensions"].append(MacrosExtension.name)
-        config["mdx_configs"][MacrosExtension.name] = plugin
+        if plugin.get("enabled", True):
+            config["markdown_extensions"].append(MacrosExtension.name)
+            config["mdx_configs"][MacrosExtension.name] = plugin
 
 
 # ----------------------------------------------------------------------------

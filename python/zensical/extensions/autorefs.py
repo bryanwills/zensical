@@ -366,8 +366,14 @@ class AutorefsExtension(Extension):
 
     name = "zensical.extensions.autorefs"
 
+    def __init__(self, **kwargs: Any) -> None:
+        """Initialize the extension."""
+        self._enabled: bool = kwargs.pop("enabled", True)
+
     def extendMarkdown(self, md: Markdown) -> None:
         """Register the Markdown extension."""
+        if not self._enabled:
+            return
         md.registerExtension(self)
 
         inline_processor = AutorefsInlineProcessor(md)
