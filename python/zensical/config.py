@@ -820,6 +820,9 @@ def _resolve_toc(config: dict[str, Any]) -> None:
 
 
 def _shim_autorefs(config: dict[str, Any]) -> None:
+    # The Markdown extension is already enabled
+    if AutorefsExtension.name in config["markdown_extensions"]:
+        return
     # Map autorefs plugin configuration to the extension configuration
     if "autorefs" in config["plugins"]:
         plugin = config["plugins"]["autorefs"]["config"]
@@ -863,6 +866,9 @@ def _shim_markdown_exec(config: dict[str, Any]) -> None:
 
 
 def _shim_mkdocstrings(config: dict[str, Any]) -> None:
+    # The Markdown extension is already enabled
+    if MkdocstringsExtension.name in config["markdown_extensions"]:
+        return
     # Map mkdocstrings plugin configuration to the extension configuration
     if "mkdocstrings" in config["plugins"]:
         plugin = config["plugins"]["mkdocstrings"]["config"]
@@ -878,6 +884,9 @@ def _shim_mkdocstrings(config: dict[str, Any]) -> None:
 
 
 def _shim_glightbox(config: dict[str, Any]) -> None:
+    # The Markdown extension is already enabled
+    if GlightboxExtension.name in config["markdown_extensions"]:
+        return
     # Map glightbox plugin configuration to the extension configuration
     if "glightbox" in config["plugins"]:
         plugin = config["plugins"]["glightbox"]["config"]
@@ -887,6 +896,9 @@ def _shim_glightbox(config: dict[str, Any]) -> None:
 
 
 def _shim_macros(config: dict[str, Any]) -> None:
+    # The Markdown extension is already enabled
+    if MacrosExtension.name in config["markdown_extensions"]:
+        return
     # Map macros plugin configuration to the extension configuration
     if "macros" in config["plugins"]:
         plugin = config["plugins"]["macros"]["config"]
